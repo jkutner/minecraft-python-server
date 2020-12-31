@@ -1,0 +1,15 @@
+[project]
+id = "jkutner/pycraft"
+name = "Minecraft with Python"
+version = "1.0.0"
+
+[build]
+exclude = [ ".env", ".terraform" ]
+
+[[build.env]]
+name='MINECRAFT_VERSION'
+value="1.12.2"
+
+[[build.env]]
+name='MINECRAFT_DIST'
+value="spigot"
