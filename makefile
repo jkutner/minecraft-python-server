@@ -9,7 +9,7 @@ image_repo=jkutner/pycraft
 build:
 	@pack build $(image_repo) -e MINECRAFT_VERSION="$(minecraft_version)" -e MINECRAFT_DIST="spigot" --builder jkutner/minecraft-builder:18 --pull-policy if-not-present
 
-release: build
+publish: build
 	@docker push $(image_repo)
 
 bash:
