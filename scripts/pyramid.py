@@ -1,8 +1,8 @@
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create()
 
-block = 24
-height = 50
+block = 57
+height = 175
 levels = reversed(range(height))
 
 pos = mc.player.getTilePos()
