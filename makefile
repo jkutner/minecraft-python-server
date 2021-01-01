@@ -21,4 +21,10 @@ run:
 tf:
 	@terraform apply tf
 
+restart:
+	@kubectl -n minecraft rollout restart deployment pycraft
+
+logs:
+	@kubectl logs -n minecraft -l app=pycraft -f
+
 .PHONY: build publish bash run tf
