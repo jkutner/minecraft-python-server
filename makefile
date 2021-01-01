@@ -15,4 +15,10 @@ bash:
 	@docker run -it --entrypoint=bash $(image_repo)
 
 run:
-	@docker run -it -e NGROK_API_TOKEN="$(NGROK_API_TOKEN)" -e JAVA_TOOL_OPTIONS="-Xmx2g" -p 4711:4711 -p 8080:8080 -p 25566:25566 $(image_repo)
+	@mkdir -p world
+	@docker run -it -e NGROK_API_TOKEN="$(NGROK_API_TOKEN)" -e JAVA_TOOL_OPTIONS="-Xmx2g" -v $(shell pwd)/config:/workspace/config:ro -v $(shell pwd)/world:/workspace/world -p 4711:4711 -p 8080:8080 -p 25566:25566 $(image_repo)
+
+tf:
+	@terraform apply tf
+
+.PHONY: build publish bash run tf
