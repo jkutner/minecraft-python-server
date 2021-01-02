@@ -15,7 +15,6 @@ def check_server(address, port):
 		print("Connected to %s on port %s" % (address, port))
 		return True
 	except Exception as e:
-		print("Connection to %s on port %s failed: %s" % (address, port, e))
 		return False
 	finally:
 		s.close()
@@ -34,6 +33,7 @@ def new_minecraft():
 			raise Exception("No PYCRAFT_HOST in .env file!")
 		if port is None:
 			port = 4711
+		print("Connecting to %s on port %s" % (host, port))
 		return Minecraft.create(host, int(port))
 
 def new_player(mc, name):
