@@ -1,7 +1,8 @@
 from mcpi.minecraft import Minecraft
 from mcpi.minecraft import ChatEvent
 
-mc = Minecraft.create()
+import pycraft
+mc = pycraft.new_minecraft()
 
 while True:
     events = mc.events.pollChatPosts()

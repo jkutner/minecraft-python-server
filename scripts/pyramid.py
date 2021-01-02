@@ -1,5 +1,6 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
+import pycraft
+mc = pycraft.new_minecraft()
 
 block = 57
 height = 175

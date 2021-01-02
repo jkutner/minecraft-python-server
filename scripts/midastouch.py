@@ -1,5 +1,6 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
+import pycraft
+mc = pycraft.new_minecraft()
 
 air = 0
 water = 9

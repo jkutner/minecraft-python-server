@@ -1,7 +1,7 @@
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create()
+import pycraft
 import time
-
+mc = pycraft.new_minecraft()
 pos = mc.player.getTilePos()
 floorX = pos.x - 2
 floorY = pos.y - 1
