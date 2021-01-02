@@ -1,5 +1,4 @@
 from mcpi.minecraft import Minecraft
-from os.path import join, dirname
 from dotenv import load_dotenv
 import os
 import socket
@@ -24,14 +23,17 @@ def check_server(address, port):
 def new_minecraft():
 	if check_server("localhost", 4711):
 		return Minecraft.create("localhost", 4711)
-	elif check_server("0.0.0.0", 4711):
-		return Minecraft.create("0.0.0.0", 4711)
 	else:
-		#todo - check that the dotenv file actually exists
-		dotenv_path = join(dirname(__file__), '..', '.env')
+		dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+		if not os.path.isfile(dotenv_path):
+			raise Exception("You need to create a .env file with PYCRAFT_HOST!")
 		load_dotenv(dotenv_path)
 		host = os.getenv("PYCRAFT_HOST")
 		port = os.getenv("PYCRAFT_PORT")
+		if host is None:
+			raise Exception("No PYCRAFT_HOST in .env file!")
+		if port is None:
+			port = 4711
 		return Minecraft.create(host, int(port))
 
 def new_player(mc, name):
