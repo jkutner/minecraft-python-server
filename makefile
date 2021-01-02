@@ -20,6 +20,8 @@ run:
 	@docker run -it --env-file .env -e JAVA_TOOL_OPTIONS="-Xmx2g" -v $(shell pwd)/config:/workspace/config:ro -v $(shell pwd)/world:/workspace/world -p 4711:4711 -p 8080:8080 -p 25566:25566 $(image_repo)
 
 tf:
+	@test -f config/ops.json && : || echo "[]" > config/ops.json
+	@test -f config/whitelist.json && : || echo "[]" > config/whitelist.json
 	terraform apply -var "namespace=$(K8S_NAMESPACE)" tf
 
 restart:

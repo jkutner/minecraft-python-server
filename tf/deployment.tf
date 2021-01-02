@@ -58,6 +58,11 @@ resource "kubernetes_deployment" "pycraft" {
             }
           }
 
+          env {
+            name = "_JAVA_OPTIONS"
+            value = "-Xms350m -Xmx2g"
+          }
+
           readiness_probe {
             tcp_socket {
               port = 25566
