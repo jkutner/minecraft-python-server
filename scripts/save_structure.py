@@ -39,14 +39,10 @@ def main(mc, player):
 
 if __name__ == "__main__":
 	mc = pycraft.new_minecraft()
-	#todo: Make this a current_player function
-	pycraft.load_env()
-	player_name = os.getenv("PLAYER_NAME")
-	player = mc.player
-	if not player_name is None:
-		player = pycraft.new_player(mc, player_name)
+	player = pycraft.current_player(mc)
 	
-	filename = input("What is the name of your structure? >")
+	filename = input("What is the name of your structure? > ")
+	#todo: change spaces to underscores in file name
 	input("Move to the first position and press ENTER in this window")
 	pos1 = player.getTilePos()
 

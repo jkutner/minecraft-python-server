@@ -21,14 +21,9 @@ def main(mc, player):
 
 if __name__ == "__main__":
 	mc = pycraft.new_minecraft()
-	#todo: Make this a current_player function
-	pycraft.load_env()
-	player_name = os.getenv("PLAYER_NAME")
-	player = mc.player
-	if not player_name is None:
-		player = pycraft.new_player(mc, player_name)
+	player = pycraft.current_player(mc)
 	
-	filename = input("What is the name of your structure? >")
+	filename = input("What is the name of your structure? > ")
 	structurefile = open(os.path.join("data", "%s.dat" % filename), "rb")
 	structure = pickle.load(structurefile)
 	pos = player.getTilePos()

@@ -47,6 +47,14 @@ def new_player(mc, name):
 	player = Player(mc.conn, pid)
 	return player
 
+def current_player(mc):
+	load_env()
+	player_name = os.getenv("PLAYER_NAME")
+	if not player_name is None:
+		return new_player(mc, player_name)
+	else:
+		return mc.player
+
 class Player(CmdEntity):
 	"""Methods for a player"""
 	def __init__(self, connection, pid):
