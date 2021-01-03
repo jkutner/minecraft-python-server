@@ -1,5 +1,5 @@
 from mcpi.minecraft import Minecraft
-from dotenv import load_dotenv
+import dotenv
 import os
 import socket
 import re
@@ -22,14 +22,17 @@ def check_server(address, port):
 	finally:
 		s.close()
 
+def load_env():
+	dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+	if not os.path.isfile(dotenv_path):
+		raise Exception("You need to create a .env file with PYCRAFT_HOST!")
+	dotenv.load_dotenv(dotenv_path)
+
 def new_minecraft():
 	if check_server("localhost", 4711):
 		return Minecraft.create("localhost", 4711)
 	else:
-		dotenv_path = os.path.join(os.path.dirname(__file__), '..', '.env')
-		if not os.path.isfile(dotenv_path):
-			raise Exception("You need to create a .env file with PYCRAFT_HOST!")
-		load_dotenv(dotenv_path)
+		load_env()
 		host = os.getenv("PYCRAFT_HOST")
 		port = os.getenv("PYCRAFT_PORT")
 		if host is None:
