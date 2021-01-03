@@ -5,6 +5,9 @@ import socket
 import re
 import sys
 from mcpi.minecraft import CmdEntity
+import threading
+
+player_locks = {}
 
 def check_server(address, port):
 	# Create a TCP socket
@@ -46,6 +49,7 @@ class Player(CmdEntity):
 	def __init__(self, connection, pid):
 		CmdEntity.__init__(self, connection)
 		self.pid = pid
+		self.lock = threading.Lock()
 
 	def getPos(self):
 		return CmdEntity.getPos(self, self.pid)
@@ -71,6 +75,9 @@ class Player(CmdEntity):
 		return CmdEntity.getEntities(self. self.pid, distance=10, typeId=-1)
 	def removeEntities(self, distance=10, typeId=-1):
 		return CmdEntity.removeEntities(self. self.pid, distance=10, typeId=-1)
+
+	def is_running(self):
+		return self.lock.locked()
 
 if __name__ == "__main__":
 	new_minecraft()
