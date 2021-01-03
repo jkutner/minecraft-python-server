@@ -1,10 +1,11 @@
 from mcpi.minecraft import Minecraft
 import pycraft
 
-def main(mc, player, block_type = 57):
+def main(mc, player, block_type = 0):
+	player.log()
 	air = 0
 	water = 9
-	while player.is_running():
+	while player.locked():
 		pos = player.getTilePos()
 		blockBelow = mc.getBlock(pos.x, pos.y - 1, pos.z)
 

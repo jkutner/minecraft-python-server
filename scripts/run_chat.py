@@ -10,18 +10,15 @@ import threading
 mc = pycraft.new_minecraft()
 
 def run_in_background(func, mc, player, *args):
-	stop_background(player)
+	player.unlock()
 
 	# TODO check if the function accepts the correct args
-	th = threading.Thread(target=func,args=[mc, player]+args)
+	th = threading.Thread(target=func, kwargs={"mc": mc, "player": player})
 
-	if player.lock.acquire(False):
+	if player.lock():
 		th.start()
 	else:
 		print("Failed to run func: %s" % func)
-
-def stop_background(player):
-	player.lock.release()
 
 if __name__ == "__main__":
 	while True:
@@ -33,7 +30,10 @@ if __name__ == "__main__":
 						player = Player(mc.conn, e.entityId)
 						script = e.message.replace("python ", "")
 						if script == "stop":
-							stop_background(player)
+							player.unlock()
+						elif script == "whoami":
+							player.log()
+							mc.postToChat(player.info())
 						else:
 							try:
 								print("Importing %s..." % script)

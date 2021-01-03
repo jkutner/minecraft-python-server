@@ -49,8 +49,9 @@ class Player(CmdEntity):
 	def __init__(self, connection, pid):
 		CmdEntity.__init__(self, connection)
 		self.pid = pid
-		self.lock = threading.Lock()
 
+	def getName(self):
+		return CmdEntity.getName(self, self.pid)
 	def getPos(self):
 		return CmdEntity.getPos(self, self.pid)
 	def setPos(self, *args):
@@ -76,8 +77,33 @@ class Player(CmdEntity):
 	def removeEntities(self, distance=10, typeId=-1):
 		return CmdEntity.removeEntities(self. self.pid, distance=10, typeId=-1)
 
-	def is_running(self):
-		return self.lock.locked()
+	def locked(self):
+		lock = player_locks.get(self.pid)
+		if not lock is None:
+			return lock.locked()
+		else:
+			return False
+
+	def lock(self):
+		lock = player_locks.get(self.pid)
+		if lock is None:
+			lock = threading.Lock()
+			player_locks[self.pid] = lock
+		return lock.acquire(False)
+
+	def unlock(self):
+		lock = player_locks.get(self.pid)
+		if not lock is None:
+			try:
+				lock.release()
+			except:
+				pass
+
+	def info(self):
+		return "Player(pid=%s, name=%s, locked=%s)" % (self.pid, self.getName(), self.locked())
+
+	def log(self):
+		print(self.info())
 
 if __name__ == "__main__":
 	new_minecraft()
