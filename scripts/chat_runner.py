@@ -77,3 +77,4 @@ if __name__ == "__main__":
 						print("Unknown event type: %s" % (e.type))
 		except:
 			time.sleep(1)
+			print("Recovering from error")
