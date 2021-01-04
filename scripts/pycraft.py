@@ -1,5 +1,6 @@
 from mcpi.minecraft import Minecraft
 import dotenv
+import time
 import os
 import socket
 import re
@@ -64,11 +65,6 @@ class Player(CmdEntity):
 
 	def pollBlockHits(self):
 		return CmdEntity.pollBlockHits(self, self.pid)
-		# s = self.conn.sendReceive(b"entity.events.block.hits", self.pid)
-		# print("sssss: %s" % s)
-		# events = [e for e in s.split("|") if e]
-		# print("events: %s" % events)
-		# return [BlockEvent.Hit(*list(map(int, e.split(",")))) for e in events]
 	def getName(self):
 		return CmdEntity.getName(self, self.pid)
 	def getPos(self):
@@ -76,7 +72,11 @@ class Player(CmdEntity):
 	def setPos(self, *args):
 		return CmdEntity.setPos(self, self.pid, args)
 	def getTilePos(self):
-		return CmdEntity.getTilePos(self, self.pid)
+		try:
+			return CmdEntity.getTilePos(self, self.pid)
+		except:
+			print("Retrying")
+			return CmdEntity.getTilePos(self, self.pid)
 	def setTilePos(self, *args):
 		return CmdEntity.setTilePos(self, self.pid, args)
 	def setDirection(self, *args):
