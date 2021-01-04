@@ -12,7 +12,7 @@ on:
 
 jobs:
     create-package:
-        name: Package, Publish, and Register
+        name: Publish Image
         runs-on:
             - ubuntu-latest
         steps:
@@ -31,7 +31,9 @@ jobs:
               uses: buildpacks/github-actions/setup-pack@v3.1.0
             - id: build
               name: Build & Publish
-              run: make publish
+              run: |
+                touch .env
+                make publish
               shell: bash
               env:
                 IMAGE_REPO: ghcr.io/${{ github.repository_owner }}/apps/pycraft
