@@ -3,21 +3,21 @@
 include .env
 
 SHELL=/bin/bash -o pipefail
-image_repo=jkutner/pycraft
+IMAGE_REPO ?= jkutner/pycraft
 K8S_NAMESPACE ?= minecraftasdfsa
 
 build:
-	@pack build $(image_repo) --builder jkutner/minecraft-builder:18 --pull-policy if-not-present
+	@pack build $(IMAGE_REPO) --builder jkutner/minecraft-builder:18 --pull-policy if-not-present
 
 publish: build
-	@docker push $(image_repo)
+	@docker push $(IMAGE_REPO)
 
 bash:
-	@docker run -it --entrypoint=bash $(image_repo)
+	@docker run -it --entrypoint=bash $(IMAGE_REPO)
 
 run:
 	@mkdir -p world
-	@docker run -it --env-file .env -e JAVA_TOOL_OPTIONS="-Xmx2g" -v $(shell pwd)/config:/workspace/config:ro -v $(shell pwd)/world:/workspace/world -p 4711:4711 -p 8080:8080 -p 25566:25566 $(image_repo)
+	@docker run -it --env-file .env -e JAVA_TOOL_OPTIONS="-Xmx2g" -v $(shell pwd)/config:/workspace/config:ro -v $(shell pwd)/world:/workspace/world -p 4711:4711 -p 8080:8080 -p 25566:25566 $(IMAGE_REPO)
 
 tf:
 	@test -f config/ops.json && : || echo "[]" > config/ops.json

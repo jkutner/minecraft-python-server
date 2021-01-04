@@ -6,6 +6,7 @@ version = "1.0.0"
 [build]
 exclude = [
     ".env",
+    ".github",
     ".terraform",
     "world",
     "config"
