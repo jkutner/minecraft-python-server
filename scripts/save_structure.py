@@ -22,6 +22,9 @@ def copyStructure(x1, y1, z1, x2, y2, z2):
 	structure = []
 
 	print("Please wait...")
+	print("Height: %s" % height)
+	print("Width: %s" % width)
+	print("Length: %s" % length)
 
 	#Copy the structure
 	for row in range(height):

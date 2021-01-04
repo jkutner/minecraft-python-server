@@ -38,6 +38,7 @@ def parse_kwargs(mc, command):
 
 if __name__ == "__main__":
 	while True:
+		time.sleep(1)
 		events = mc.events.pollChatPosts()
 		if len(events) > 0:
 			for e in events:

@@ -6,6 +6,7 @@ import re
 import sys
 from mcpi.minecraft import CmdEntity
 import threading
+from mcpi.minecraft import BlockEvent
 
 player_locks = {}
 
@@ -61,6 +62,13 @@ class Player(CmdEntity):
 		CmdEntity.__init__(self, connection)
 		self.pid = pid
 
+	def pollBlockHits(self):
+		return CmdEntity.pollBlockHits(self, self.pid)
+		# s = self.conn.sendReceive(b"entity.events.block.hits", self.pid)
+		# print("sssss: %s" % s)
+		# events = [e for e in s.split("|") if e]
+		# print("events: %s" % events)
+		# return [BlockEvent.Hit(*list(map(int, e.split(",")))) for e in events]
 	def getName(self):
 		return CmdEntity.getName(self, self.pid)
 	def getPos(self):
