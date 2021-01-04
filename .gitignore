@@ -2,6 +2,8 @@
 /config/*
 /data/*
 /world/
+/world_the_end/
+/world_nether/
 
 .terraform
 .terraform.*
