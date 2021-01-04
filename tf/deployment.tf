@@ -63,6 +63,16 @@ resource "kubernetes_deployment" "pycraft" {
             value = "-Xms350m -Xmx2g"
           }
 
+          env {
+            name = "AWS_BUCKET"
+            value = var.aws_s3_bucket
+          }
+
+          env {
+            name = "WORLD_NAME"
+            value = "${kubernetes_namespace.minecraft.metadata[0].name}-pycraft-world"
+          }
+
           readiness_probe {
             tcp_socket {
               port = 25566

@@ -22,7 +22,7 @@ run:
 tf:
 	@test -f config/ops.json && : || echo "[]" > config/ops.json
 	@test -f config/whitelist.json && : || echo "[]" > config/whitelist.json
-	terraform apply -var "namespace=$(K8S_NAMESPACE)" tf
+	terraform apply -var "namespace=$(K8S_NAMESPACE)" -var "aws_s3_bucket=$(AWS_S3_BUCKET)" tf
 
 restart:
 	kubectl -n $(K8S_NAMESPACE) rollout restart deployment pycraft

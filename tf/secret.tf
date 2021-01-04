@@ -7,5 +7,6 @@ resource "kubernetes_secret" "pycraft" {
   data = {
     "ops.json" = file("${path.module}/../config/ops.json")
     "whitelist.json" = file("${path.module}/../config/whitelist.json")
+    ".s3cfg" = file("${path.module}/../config/.s3cfg")
   }
 }
