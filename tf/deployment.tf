@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "pycraft" {
           }
         }
         container {
-          image = "jkutner/pycraft"
+          image = var.image_repo
           name  = "pycraft-server"
 
           port {

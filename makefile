@@ -7,6 +7,7 @@ IMAGE_REPO ?= jkutner/pycraft
 K8S_NAMESPACE ?= minecraftasdfsa
 
 build:
+	@pack trust-builder jkutner/minecraft-builder:18
 	@pack build $(IMAGE_REPO) --builder jkutner/minecraft-builder:18 --pull-policy if-not-present
 
 publish: build
