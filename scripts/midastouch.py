@@ -2,7 +2,7 @@ from mcpi.minecraft import Minecraft
 import pycraft
 mc = pycraft.new_minecraft()
 
-def main(player, block_type = 0):
+def main(mc, player, block_type = 0):
 	player.log()
 	air = 0
 	water = 9

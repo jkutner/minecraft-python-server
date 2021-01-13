@@ -2,7 +2,7 @@ from mcpi.minecraft import Minecraft
 import pycraft
 
 def main(mc, player, entity_type = 2):
-	player.log()
+	#player.log()
 	pos = player.getTilePos()
 	mc.spawnEntity(pos.x, pos.y, pos.z + 2, int(entity_type))
 	print(player.getEntities())
