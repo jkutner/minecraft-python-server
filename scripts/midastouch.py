@@ -1,7 +1,8 @@
 from mcpi.minecraft import Minecraft
 import pycraft
+mc = pycraft.new_minecraft()
 
-def main(mc, player, block_type = 0):
+def main(player, block_type = 0):
 	player.log()
 	air = 0
 	water = 9
@@ -13,7 +14,6 @@ def main(mc, player, block_type = 0):
 			mc.setBlock(pos.x, pos.y -1, pos.z, int(block_type))
 
 if __name__ == "__main__":
-	mc = pycraft.new_minecraft()
-	player = pycraft.new_player(mc, "DarkCarat")
+	player = pycraft.current_player(mc)
 	block_type = input("Please enter your block id: ")
 	main(mc, player, block_type)

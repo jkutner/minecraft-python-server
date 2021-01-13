@@ -92,9 +92,9 @@ class Player(CmdEntity):
 	def getPitch(self):
 		return CmdEntity.getPitch(self, self.pid)
 	def getEntities(self, distance=10, typeId=-1):
-		return CmdEntity.getEntities(self. self.pid, distance=10, typeId=-1)
+		return CmdEntity.getEntities(self, self.pid, distance=10, typeId=-1)
 	def removeEntities(self, distance=10, typeId=-1):
-		return CmdEntity.removeEntities(self. self.pid, distance=10, typeId=-1)
+		return CmdEntity.removeEntities(self, self.pid, distance=10, typeId=-1)
 
 	def locked(self):
 		lock = player_locks.get(self.pid)
