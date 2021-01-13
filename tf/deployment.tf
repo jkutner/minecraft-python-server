@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "pycraft" {
           }
         }
         container {
-          image = "jkutner/pycraft"
+          image = var.image_repo
           name  = "pycraft-server"
 
           port {
@@ -61,6 +61,16 @@ resource "kubernetes_deployment" "pycraft" {
           env {
             name = "_JAVA_OPTIONS"
             value = "-Xms350m -Xmx2g"
+          }
+
+          env {
+            name = "AWS_BUCKET"
+            value = var.aws_s3_bucket
+          }
+
+          env {
+            name = "WORLD_NAME"
+            value = "${kubernetes_namespace.minecraft.metadata[0].name}-pycraft-world"
           }
 
           readiness_probe {

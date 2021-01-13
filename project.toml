@@ -4,12 +4,16 @@ name = "Minecraft with Python"
 version = "1.0.0"
 
 [build]
-exclude = [ 
-    ".env", 
-    ".terraform", 
-    "world", 
-    "config" 
+exclude = [
+    ".env",
+    ".github",
+    ".terraform",
+    "world",
+    "config"
 ]
+
+[[build.buildpacks]]
+id = "jkutner/minecraft"
 
 [[build.env]]
 name='MINECRAFT_VERSION'
