@@ -11,22 +11,23 @@ def main(mc, player):
 	mc.postToChat("Done!")
 	player.setTilePos(start_position.x + 8, start_position.y + 1, start_position.z + 4)
 	mc.spawnEntity(start_position.x + 8, start_position.y + 1, start_position.z + 8, 120)
-	while True:
-		time.sleep(1)
-		pos = player.getTilePos()
-		if pos.x == start_position.x + 8:
-			mc.postToChat("You are 8 blocks away. Congratulations!")
-		elif pos.x == start_position.x - 8:
-			mc.postToChat("You are 8 blocks away. Congratulations!")
-		elif pos.z == start_position.z + 8:
-			mc.postToChat("You are 8 blocks away. Congratulations!")
-		elif pos.z == start_position.z - 8:
-			mc.postToChat("You are 8 blocks away. Congratulations!")
-		else:
-			mc.postToChat("You are not 8 blocks away. How rude.")
+	mc.setSign(start_position.x + 8, start_position.y + 1, start_position.z + 4, 68, 4, ["TEST"])
+	# while True:
+	# 	time.sleep(1)
+	# 	pos = player.getTilePos()
+		# if pos.x == start_position.x + 8:
+		# 	mc.postToChat("You are 8 blocks away. Congratulations!")
+		# elif pos.x == start_position.x - 8:
+		# 	mc.postToChat("You are 8 blocks away. Congratulations!")
+		# elif pos.z == start_position.z + 8:
+		# 	mc.postToChat("You are 8 blocks away. Congratulations!")
+		# elif pos.z == start_position.z - 8:
+		# 	mc.postToChat("You are 8 blocks away. Congratulations!")
+		# else:
+		# 	mc.postToChat("You are not 8 blocks away. How rude.")
 
 def load_prison(mc, player, pos):
-	structurefile = open(os.path.join("data", "prison1.dat"), "rb")
+	structurefile = open(os.path.join("save", "prisoncells.dat"), "rb")
 	structure = pickle.load(structurefile)
 	x = pos.x
 	y = pos.y
