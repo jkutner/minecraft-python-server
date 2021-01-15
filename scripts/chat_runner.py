@@ -75,6 +75,7 @@ if __name__ == "__main__":
 						handle_chat_event(e)
 					else:
 						print("Unknown event type: %s" % (e.type))
-		except:
+		except Exception as e:
 			time.sleep(1)
+			print(e)
 			print("Recovering from error")
