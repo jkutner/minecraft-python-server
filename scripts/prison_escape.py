@@ -11,6 +11,7 @@ def main(mc, player):
 	mc.postToChat("Done!")
 	player.setTilePos(start_position.x + 8, start_position.y + 1, start_position.z + 4)
 	mc.spawnEntity(start_position.x + 8, start_position.y + 1, start_position.z + 8, 120)
+	mc.spawnEntity(start_position.x + 2, start_position.y + 1, start_position.z + 2, )
 	mc.setSign(start_position.x + 8, start_position.y + 1, start_position.z + 4, 68, 4, ["TEST"])
 	# while True:
 	# 	time.sleep(1)
