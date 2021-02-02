@@ -11,8 +11,22 @@ def main(mc, player):
 	mc.postToChat("Done!")
 	player.setTilePos(start_position.x + 8, start_position.y + 1, start_position.z + 4)
 	mc.spawnEntity(start_position.x + 8, start_position.y + 1, start_position.z + 8, 120)
-	mc.spawnEntity(start_position.x + 2, start_position.y + 1, start_position.z + 2, )
-	mc.setSign(start_position.x + 8, start_position.y + 1, start_position.z + 4, 68, 4, ["TEST"])
+	mc.spawnEntity(start_position.x + 2, start_position.y + 1, start_position.z + 2, 27)
+	mc.setSign(start_position.x + 8, start_position.y + 1, start_position.z + 4, 68, 4, ["Welcome to", "Prison"])
+	mc.setBlock(start_position.x + 8, start_position.y + 2, start_position.z + 4, 69, 2)
+	game_loop(mc, player, start_position)
+
+def game_loop(mc, player, start_position):
+	while True:
+		time.sleep(1)
+		lever = mc.getBlockWithData(start_position.x + 8, start_position.y + 2, start_position.z + 4)
+		cur_pos = player.getTilePos()
+		if flushed(lever, cur_pos, start_position):
+			mc.postToChat("Test succeeded!")
+			break
+
+def flushed(lever, cur_pos, start_position):
+	return lever.data == 10 and cur_pos.x == start_position.x + 8 and cur_pos.y == start_position.y + 2 and cur_pos.z == start_position.z + 5
 	# while True:
 	# 	time.sleep(1)
 	# 	pos = player.getTilePos()
